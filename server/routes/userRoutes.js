@@ -8,14 +8,17 @@ router.post('/register', async (req, res) => {
   const { name, email, password, role } = req.body;
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10); // Hash the password securely
+
     const query = 'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)';
-    connection.query(query, [name, email, hashedPassword, role], (err) => {
+    connection.query(query, [name, email, hashedPassword, role], (err, results) => {
       if (err) {
         console.error('Error registering user:', err);
         return res.status(500).send('Error registering user');
       }
-      res.status(201).send('User registered successfully');
+
+      // Return the user role in the response
+      res.status(201).send({ message: 'User registered successfully', role });
     });
   } catch (err) {
     console.error('Error hashing password:', err);
