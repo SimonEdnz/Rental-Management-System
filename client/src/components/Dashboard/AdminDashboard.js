@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
-
+import './AdminDashboard.css'; // Import the updated CSS file
 
 function AdminDashboard() {
   const [users, setUsers] = useState([]);
@@ -25,9 +25,24 @@ function AdminDashboard() {
       .catch(error => console.error('Error fetching revenue:', error));
   }, []);
 
+  
+
+  const sidebarLinks = [
+    { label: 'Dashboard', path: '/admin/dashboard' },
+    { label: 'User Management', path: '/admin/users' },
+    { label: 'Branch Management', path: '/admin/branches' },
+    { label: 'Room Management', path: '/admin/rooms' },
+    { label: 'Tenant Management', path: '/admin/tenants' },
+    { label: 'Revenue & Billing', path: '/admin/revenue' },
+    { label: 'Rent Defaulters', path: '/admin/rent-defaulters' },
+    { label: 'Expense Management', path: '/admin/expenses' },
+    { label: 'Reports', path: '/admin/reports' },
+    { label: 'Settings', path: '/admin/settings' },
+  ];
+
   return (
     <div className="dashboard-container">
-      <Sidebar role="admin" />
+      <Sidebar links={sidebarLinks} />
       <div className="main-content container-fluid">
         <h1 className="my-4">Admin Dashboard</h1>
         <div className="row">
@@ -58,7 +73,7 @@ function AdminDashboard() {
           </div>
         </div>
 
-        {/* Table for User Management */}
+        {/* User Management Table */}
         <h3 className="my-4">User Management</h3>
         <div className="table-responsive">
           <table className="table table-striped">
@@ -87,6 +102,7 @@ function AdminDashboard() {
             </tbody>
           </table>
         </div>
+
       </div>
     </div>
   );

@@ -75,6 +75,20 @@ router.put('/:id', (req, res) => {
   });
 });
 
+// Fetch all users
+router.get('/', (req, res) => {
+  const query = 'SELECT * FROM users'; // Query to get all users
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching users:', err);
+      return res.status(500).send('Error fetching users');
+    }
+
+    res.status(200).send(results); // Send the list of users in the response
+  });
+});
+
 // Delete User
 router.delete('/:id', (req, res) => {
   const { id } = req.params;

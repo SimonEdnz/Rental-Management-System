@@ -14,9 +14,10 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/manager-dashboard" element={<ManagerDashboard />} />
-        <Route path="/tenant-dashboard" element={<TenantDashboard />} />
+        <Route path="/Dashboard/AdminDashboard" element={<AdminDashboard />} />
+        <Route path="/Dashboard/ManagerDashboard" element={<ManagerDashboard />} />
+        <Route path="/Dashboard/TenantDashboard" element={<TenantDashboard />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

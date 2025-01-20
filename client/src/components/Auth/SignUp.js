@@ -1,40 +1,51 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../../utils/api';
+import axios from 'axios';
+import './SignUp.css';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
+    confirmPassword: '',
     role: 'tenant', // Default role
   });
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    setError(''); // Reset error state before making the request
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
     try {
-      const response = await api.post('/register', formData);
-      alert('Sign Up Successful! Redirecting to dashboard...');
+      const response = await axios.post('http://localhost:5000/api/users/register', formData);
+      alert('Sign Up Successful!');
       const role = response.data.role;
 
       // Navigate to the respective dashboard based on the role
       if (role === 'admin') {
-        navigate('/admin/dashboard');
+        navigate('/Dashboard/AdminDashboard');
       } else if (role === 'manager') {
-        navigate('/manager/dashboard');
+        navigate('/Dashboard/ManagerDashboard');
       } else if (role === 'tenant') {
-        navigate('/tenant/dashboard');
+        navigate('/Dashboard/TenantDashboard');
       }
     } catch (error) {
       console.error('Sign Up Error:', error.response?.data || error.message);
-      alert('Error during sign-up. Please try again.');
+      setError(error.response?.data || 'Error during sign-up. Please try again.');
     }
   };
 
   return (
     <div className="auth-container">
       <h2>Sign Up</h2>
+      {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSignUp}>
         <input
           type="text"
@@ -57,6 +68,13 @@ const SignUp = () => {
           onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           required
         />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          value={formData.confirmPassword}
+          onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+          required
+        />
         <select
           value={formData.role}
           onChange={(e) => setFormData({ ...formData, role: e.target.value })}
@@ -67,6 +85,9 @@ const SignUp = () => {
         </select>
         <button type="submit">Sign Up</button>
       </form>
+      <p className="sign-in-link">
+        Already have an account? <a href="/signin">Sign In</a>
+      </p>
     </div>
   );
 };

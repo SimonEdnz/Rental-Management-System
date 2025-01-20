@@ -10,18 +10,22 @@ const Sidebar = ({ links }) => {
         <h2>Rental Management</h2>
       </div>
       <ul className="sidebar-links">
-        {links.map((link, index) => (
-          <li key={index}>
-            <NavLink
-              to={link.path}
-              className="sidebar-link"
-              activeClassName="active"
-              exact
-            >
-              {link.label}
-            </NavLink>
-          </li>
-        ))}
+        {links.length === 0 ? (
+          <li>No links available</li>
+        ) : (
+          links.map((link, index) => (
+            <li key={index}>
+              <NavLink
+                to={link.path}
+                className="sidebar-link"
+                activeClassName="active"
+                exact
+              >
+                {link.label}
+              </NavLink>
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );

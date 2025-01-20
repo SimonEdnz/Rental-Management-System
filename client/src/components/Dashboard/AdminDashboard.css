@@ -1,0 +1,143 @@
+/* src/components/AdminDashboard.css */
+
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f4f7fc;
+  position: relative; /* Ensure the logout button is positioned relative to this container */
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-left: 250px; /* Adjust this if the Sidebar has a fixed width */
+}
+
+.logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #2980b9;
+}
+
+.my-4 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.card {
+  border-radius: 10px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card.shadow-sm {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card h5 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #34495e;
+}
+
+.card p {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.text-primary {
+  color: #3498db;
+}
+
+.text-success {
+  color: #2ecc71;
+}
+
+.text-danger {
+  color: #e74c3c;
+}
+
+.table-responsive {
+  margin-top: 30px;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9fafb;
+}
+
+.thead-dark {
+  background-color: #34495e;
+  color: white;
+}
+
+.table th,
+.table td {
+  padding: 15px;
+  text-align: left;
+}
+
+.table th {
+  font-weight: bold;
+}
+
+.table td {
+  color: #7f8c8d;
+}
+
+.table .btn {
+  border-radius: 5px;
+}
+
+.table .btn-warning {
+  background-color: #f39c12;
+  color: white;
+}
+
+.table .btn-warning:hover {
+  background-color: #e67e22;
+}
+
+.table .btn-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.table .btn-danger:hover {
+  background-color: #c0392b;
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+  .main-content {
+    margin-left: 0;
+  }
+}
+/* Enable smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
